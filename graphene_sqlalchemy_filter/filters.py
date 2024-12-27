@@ -11,7 +11,7 @@ from graphene.types.generic import GenericScalar
 from graphene.types.inputobjecttype import InputObjectTypeOptions
 from graphene.types.utils import get_field_as
 from graphene_sqlalchemy import __version__ as gqls_version
-from graphene_sqlalchemy.converter import convert_sqlalchemy_model_using_registry
+from graphene_sqlalchemy.converter import convert_sqlalchemy_type
 
 graphene_sqlalchemy_version_lt_2_1 = tuple(
     map(int, gqls_version.split('.')[:2])
@@ -590,7 +590,7 @@ class FilterSet(graphene.InputObjectType):
         if column_type is None:
             return GenericScalar
         else:
-            _type = convert_sqlalchemy_model_using_registry(column_type)
+            _type = convert_sqlalchemy_type(column_type, sqla_column)
             if inspect.isfunction(_type):
                 return _type()  # only graphene-sqlalchemy>2.2.0
             return _type
