@@ -14,7 +14,7 @@ from graphene_sqlalchemy import __version__ as gqls_version
 from graphene_sqlalchemy.converter import convert_sqlalchemy_type
 
 graphene_sqlalchemy_version_lt_2_1 = tuple(
-    map(int, get_field_as.split('.')[:2])
+    map(int, gqls_version.split('.')[:2])
 ) < (2, 1)
 
 if graphene_sqlalchemy_version_lt_2_1:
